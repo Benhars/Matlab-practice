@@ -1,0 +1,90 @@
+
+% %%%%%%%%%%%%%%%%%%%%%% PROBLEM SET ON MATLAB %%%%%%%%%%%%%%%%%%%%%%
+
+% bASIC COMMANDS; pd; current directory, lookfor disp: search help for
+% keywords; ls: list files on directory and disp: provide documentation
+% clearvars remove everything in workspace
+%   Question 1 (a)
+
+A = [0 -1 2; -2 -1 4 ; 2 7 -3];
+B = [-7 1 1; 7 -3 -2; 3 5 0];
+y = [3;-1;2];
+
+% (i)  Define C = AB
+C0 = A*B ;
+
+% (ii)  DeÖne C as the element-by-element matrix product of A and B
+
+C1 = A.*B ;
+
+% iii: For each case solve the linear equation Cx = y
+
+x0 = C0\y ; 
+x1 = C1\y ;
+
+%% iv. DeÖne C = A + B. Find the largest element in each row of C. 
+% Find the smallest element in each column of C.
+large = zeros(3,1);
+smallest = zeros(3,1);
+C = A + B ;
+for i = 1:size(C,1)
+    large(i,1) = max(C(i,:)) ;
+    smallest(i,1) = min(C(:,i));
+end
+
+
+%% iv: Assume theta_t is governed by the following law of motion
+
+ % generate a random number 
+theta_t = zeros(50,200) ;
+for i = 1:size(theta_t,1)
+    for j = 1:199
+        r = rand;
+        if r > 0.4
+            theta_t(i,j+1) = theta_t(i,j) + 0.1 ;
+        else
+            theta_t(i,j+1) = theta_t(i,j) - 0.1 ;
+        end
+    end
+    plot(theta_t(i,:))
+    hold on
+    title('50 stochastic plots of theta_t')
+    xlabel('time')
+    ylabel('sequences')
+
+end
+hold off
+
+
+%% c: (i) Construct a grid for kt (and hence also kt+1) of g evenly spaced 
+% points on the interval [2:85; 3:15]. Let g = 101.
+gamma = 5; alpha = 0.35;  delta = 0.025;
+
+kt = linspace(2.85,3.15,101); 
+kt_1 = linspace(2.85,3.15,101);
+ct = zeros(101);
+for i = 1:101
+    for j = 1:101
+        ct(i,j) = gamma*kt(1,i)^(alpha) + (1-delta) * kt(1,i) - kt(1,j);
+    end
+    plot(ct(i,:))
+    hold on
+    title('Combination of different Consumption plots as a fuction of capital stock')
+   
+end
+hold off
+%
+figure(3)
+mesh(kt,kt_1,ct)
+colorbar
+title('Mesh diagram of Consumption')
+xlabel('Kt')
+ylabel('Kt+1')
+zlabel('Ct')
+
+
+%% QUESTION 2: The Neoclassical growth model with exogenous saving rate
+
+% (A) 
+
+
