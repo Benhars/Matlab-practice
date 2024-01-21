@@ -1,7 +1,10 @@
 
 % %%%%%%%%%%%%%%%%%%%%%% PROBLEM SET ON MATLAB %%%%%%%%%%%%%%%%%%%%%%
+clear all ;
+clc;
 
-% bASIC COMMANDS; pd; current directory, lookfor disp: search help for
+
+% BASIC COMMANDS; pd; current directory, lookfor disp: search help for
 % keywords; ls: list files on directory and disp: provide documentation
 % clearvars remove everything in workspace
 %   Question 1 (a)
@@ -85,6 +88,50 @@ zlabel('Ct')
 
 %% QUESTION 2: The Neoclassical growth model with exogenous saving rate
 
-% (A) 
+alpha = 1/3;
+delta = 0.05; sigma = 0.20;
 
+capital = zeros(1,100); capital(1) = 5 ;
+inv = zeros(1,100); output = zeros(1,100); consumption = zeros(1,100);
+for t = 1:100
+    capital(t+1) = (1-delta) * capital(t) + sigma*capital(t)^alpha ;
+    inv(t) = sigma * capital(t)^alpha ;
+    output(t) = capital(t)^alpha ;
+    consumption(t) = (1-sigma) * capital(t);
+end
 
+% figure(7)
+% plot(capital)
+% hold on
+% plot(inv)
+% plot(output)
+% plot(consumption)
+% xlabel('time')
+% ylabel('K,y,c,inv')
+% hold off
+
+%% Individual plots
+
+figure(4)
+plot(capital)
+title('Capital stock over time')
+xlabel('time')
+ylabel('capital')
+
+figure(5)
+plot(inv)
+title('investment over time')
+xlabel('time')
+ylabel('investment')
+
+figure(6)
+plot(output)
+title('output over time')
+xlabel('time')
+ylabel('output')
+
+figure(7)
+plot(consumption)
+title('consumption over time')
+xlabel('time')
+ylabel('consumption')
